@@ -93,6 +93,54 @@
    
    /* ███████████████████ Date check functions ███████████████████ */ 
 
+
+   var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+   var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+   
+   si.today =  function(_value){
+	   var now = new Date();
+	   return si.date(_value) && _value.toDateString() === now.toDateString();
+	   
+   }
+   s.tomorrow = function(_value){
+	   var now  =  new Date();
+	   var tomorrow = new Date();
+	   tomorrow.setDate(now.getDate() + 1);
+	   
+	   return si.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
+   }
+   
+   s.yesterday = function(_value){
+	   var now  =  new Date();
+	   var tomorrow = new Date();
+	   tomorrow.setDate(now.getDate() - 1);
+	   
+	   return si.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
+   }
+   
+   si.past = function(_value){
+	   return si.date(_value) && _value.getTime() < (new Date()).getTime();
+   }
+   
+   si.futur = function(_value){
+	   return si.pas.today(_value) && si.pas.past(_value);
+   }  
+   si.day= function(_dateObj , _dayString){
+	   return si.date(_dateObj) && d_ayString.toLowerCase() == days[_dateObj.getDay()]; 
+   }
+   si.month = function(_dateObj ,  _monthStr){
+	   si.date(_dateObj) && monthStr.toLowerCase == months[_dateObj.getMonth()];
+   }
+   si.inDateRang =  function(_dateObj  , _startDate ,  _endDate){
+	   if(si.pas.date(_dateObj) ||  si.pas.date(_startDate)
+			    ||  si.pas.date(_endDate)){
+		   return false;
+	   }
+	   return (_dateObj.getTime() <=  _endDate.getTime() && _dateObj.getTime() >= _startDate.getTime());
+		   
+   }
+
    /* ███████████████████ Pattern check functions ███████████████████ */ 
    
    /* ███████████████████ Plat-form check functions ███████████████████ */
