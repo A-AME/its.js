@@ -103,7 +103,7 @@
 	   return si.date(_value) && _value.toDateString() === now.toDateString();
 	   
    }
-   s.tomorrow = function(_value){
+   si.tomorrow = function(_value){
 	   var now  =  new Date();
 	   var tomorrow = new Date();
 	   tomorrow.setDate(now.getDate() + 1);
@@ -111,7 +111,7 @@
 	   return si.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
    }
    
-   s.yesterday = function(_value){
+   si.yesterday = function(_value){
 	   var now  =  new Date();
 	   var tomorrow = new Date();
 	   tomorrow.setDate(now.getDate() - 1);
