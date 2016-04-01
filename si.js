@@ -48,7 +48,7 @@
    }
 
    si.argument = function(_value){
-    return   si.nicht.null(_value) && toString.call(_value) === '[object Arguments]'
+    return   si.pas.null(_value) && toString.call(_value) === '[object Arguments]'
 	    ||  typeof _value === 'object'  && 'callee' in _value; 
    }
 
