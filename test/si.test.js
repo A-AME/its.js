@@ -16,6 +16,20 @@ describe('type checks', function(){
 			expect(si.pas.argument(notargs)).to.be.true;
 		});
 	});
+	describe('si.array && si.pas.array' , function(){
+		it('it should return true if its passed argument is an array', function(){
+			var arr =  new Array();
+			var arrStd = [];
+
+			expect(si.array(arr)).to.be.true;
+			expect(si.array(arrStd)).to.be.true;
+			expect(si.pas.array(arr)).to.be.false;
+			expect(si.pas.array(arrStd)).to.be.false;
+			
+		});
+
+	});
+
 });
 
 
