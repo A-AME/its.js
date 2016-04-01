@@ -29,6 +29,14 @@ describe('type checks', function(){
 		});
 
 	});
+	describe('si.boolean', function(){
+		it('it should return true if a given value is boolean', function(){
+			expect(si.boolean(true)).to.be.true;
+			expect(si.boolean(new Boolean())).to.be.true;
+			expect(si.boolean(null)).to.be.false;
+		})
+	});
+	
 
 });
 
