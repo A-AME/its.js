@@ -60,8 +60,9 @@
 	}
 
 	si.boolean = function (_value){
-		return (typeof _value === 'boolean' 
-			|| (typeof _value === 'object' && _value.valueOf === 'boolean') )
+
+		return si.pas.null(_value) && ( typeof _value === 'boolean' || _value instanceof Boolean 
+			|| (typeof _value === 'object' && _value.valueOf() === 'boolean') );
 	}
 
 	si.date = function(_value){
