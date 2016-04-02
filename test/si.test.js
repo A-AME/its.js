@@ -163,7 +163,6 @@ describe('type checks', function(){
 			expect(si.function(Object.toString)).to.be.true;
 			expect(si.function(Object.toString())).to.be.false;
 
-
 			expect(si.pas.function(function(){})).to.be.false;
 			expect(si.pas.function(Object.toString)).to.be.false;
 			expect(si.pas.function(Object.toString())).to.be.true;
