@@ -70,23 +70,24 @@
 	}
 
 	si.error = function (_value){
-		if(_value instanceof Error || toString.call(_value) === '[object Error]')
-			return true;
+		return (_value instanceof Error || toString.call(_value) === '[object Error]');
 	}
 	si.nan = Number.isNaN || function(_value){
 		return _value !== _value; 
 	}
 	si.number =  function(_value){
-		return (si.pas.nan(_value) && toString(_value) === '[object Number]');
+
+		return si.pas.null(_value) && si.pas.nan(_value) && (typeof _value === 'number' 
+			|| _value instanceof Number );
 	}
 	si.regexp = function(_value){
 		return toString.call(_value) === '[object RegExp]' || _value instanceof RegExp;
 	}
-	si.type = function(_valueOne , _valueTwo){
+	si.sameType = function(_valueOne , _valueTwo){
 		if(si.nan(_valueOne) || si.nan(_valueTwo))
-			return si.null(_valueOne()) == si.null(_valueTwo());
+			return si.null(_valueOne) == si.null(_valueTwo);
 		else
-			return toString.call(_valueOne()) === toString.call(_valueTwo());
+			return toString.call(_valueOne) === toString.call(_valueTwo);
 	}
 	si.function =  function(_value){
 		return toString.call(_value) === '[object Function]';
