@@ -1,6 +1,3 @@
-# si.js
-si.js is a javascript general library to check an object 
-
 <snippet>
   <content><![CDATA[
   # ${1:SI.JS}
