@@ -16,7 +16,7 @@
 		module.exports = factory();
 	}else{   
 		// Browsers
-		root.wenn = factory();
+		root.si = factory();
 	}
 }(this, function(){
 	var root  =  this ||  global;
@@ -122,6 +122,7 @@
 	}
 
 	si.past = function(_value){
+
 		return si.date(_value) && _value.getTime() < (new Date()).getTime();
 	}
 
@@ -129,10 +130,11 @@
 		return si.pas.today(_value) && si.pas.past(_value);
 	}  
 	si.day= function(_dateObj , _dayString){
-		return si.date(_dateObj) && d_ayString.toLowerCase() == days[_dateObj.getDay()]; 
+		return si.date(_dateObj) && typeof _dayString === 'string'
+		 && _dayString.toLowerCase() == days[_dateObj.getDay()]; 
 	}
 	si.month = function(_dateObj ,  _monthStr){
-		si.date(_dateObj) && monthStr.toLowerCase == months[_dateObj.getMonth()];
+		si.date(_dateObj) && monthStr.toLowerCase() == months[_dateObj.getMonth()];
 	}
 	si.inDateRang =  function(_dateObj  , _startDate ,  _endDate){
 		if(si.pas.date(_dateObj) ||  si.pas.date(_startDate)

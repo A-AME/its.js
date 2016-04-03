@@ -256,5 +256,41 @@ describe('checking date', function(){
 		});
 	});
 
+	describe('si.futur  & si.pas.futur' ,function(){
+		it('it should return true if a given date is a futur date', function(){
+            var today =  new Date();
+			var yesterday = new Date();
+			yesterday.setDate(today.getDate() - 1);
+
+			var tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+			expect(si.futur(today)).to.be.false;
+			expect(si.futur(yesterday)).to.be.false;
+			expect(si.futur(tomorrow)).to.be.true;
+
+			expect(si.pas.futur(today)).to.be.true;
+			expect(si.pas.futur(yesterday)).to.be.true;
+			expect(si.pas.futur(tomorrow)).to.be.false;
+		});
+	});
+
+	describe('si.day & si.pas.date', function(){
+		it('should return true if a given day name equals the given date day', function(){
+			var timestamp =  1459695890736;
+			var dayName = 'Sunday';
+			var date =  new Date();
+			date.setTime(timestamp);
+
+			expect(si.day(date, dayName)).to.be.true;
+			expect(si.day(null, dayName)).to.be.false;
+			expect(si.day(date, '')).to.be.false;
+			expect(si.day(date, true)).to.be.false;
+
+			expect(si.pas.day(date, dayName)).to.be.false;
+			
+
+		})
+	});
 });
 
