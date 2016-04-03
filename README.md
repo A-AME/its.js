@@ -1,29 +1,29 @@
-<snippet>
-  <content>
-  ## SI.JS
+# Si.js
 
-  javascript general library to check an object
-  
-  ## Installation
-  TODO: 
-  
-  ## Usage
-  use it to check a types or regexp
-  
-  ## Contributing
-  1. Fork it!
-  2. Create your feature branch: `git checkout -b my-new-feature`
-  3. Commit your changes: `git commit -am 'Add some feature'`
-  4. Push to the branch: `git push origin my-new-feature`
-  5. Submit a pull request :D
-  
-  ## History
-  TODO
-  
-  ## Credits
-  
-  ## License
-  MIT
-  </content>
-    <tabTrigger>readme</tabTrigger>
-    </snippet>
+A node js and browser library to check types 
+
+
+## Installation
+
+```bash
+$ 
+$ 
+```
+
+## Usage
+
+An example of use as NodeJs Module
+```js
+   var si = requir('si');
+   //check if a given argument an array
+   if(si.array(new Array[])){
+
+   }
+   //check if a given value is not boolean type
+   if(si.pas.boolean('')){
+
+   }
+```
+## License
+MIT
+(c) 2016 -  Ali Amechghal
