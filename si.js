@@ -26,7 +26,7 @@
 	si.pas= {};
 
 
-	si.VERSION = '0.0.0';
+	si.VERSION = '0.1.0';
 
 	// cache native methods
 	var toString =  Object.prototype.toString;
@@ -123,7 +123,8 @@
 
 	si.past = function(_value){
 
-		return si.date(_value) && _value.getTime() < (new Date()).getTime();
+        var currentDate =  new Date();
+		return si.date(_value) && _value.getTime() < currentDate.getTime();
 	}
 
 	si.futur = function(_value){
@@ -134,9 +135,10 @@
 		 && _dayString.toLowerCase() == days[_dateObj.getDay()]; 
 	}
 	si.month = function(_dateObj ,  _monthStr){
-		si.date(_dateObj) && monthStr.toLowerCase() == months[_dateObj.getMonth()];
+		return si.date(_dateObj) && typeof _monthStr === 'string' 
+		  && (_monthStr.toLowerCase() == months[_dateObj.getMonth()]);
 	}
-	si.inDateRang =  function(_dateObj  , _startDate ,  _endDate){
+	si.inDateRange =  function(_dateObj  , _startDate ,  _endDate){
 		if(si.pas.date(_dateObj) ||  si.pas.date(_startDate)
 				||  si.pas.date(_endDate)){
 			return false;
@@ -171,7 +173,7 @@
 
 	si.pattern = function(_value, _pattern){
 		return si.pas.null(_value) && si.pas.null(_pattern)
-		&&  si.regexp(_pattern) && _value.test(_pattern);
+		&&  (si.regexp(_pattern) || si.regexp(new RegExp(_pattern))) && _pattern.test(_value);
 
 	}
 	/* ███████████████████ Plat-form check functions ███████████████████ */

@@ -245,11 +245,10 @@ describe('checking date', function(){
 			var tomorrow = new Date();
 			tomorrow.setDate(today.getDate() + 1);
 
-			expect(si.past(today)).to.be.false;
+
 			expect(si.past(yesterday)).to.be.true;
 			expect(si.past(tomorrow)).to.be.false;
 
-			expect(si.pas.past(today)).to.be.true;
 			expect(si.pas.past(yesterday)).to.be.false;
 			expect(si.pas.past(tomorrow)).to.be.true;
 
@@ -275,7 +274,7 @@ describe('checking date', function(){
 		});
 	});
 
-	describe('si.day & si.pas.date', function(){
+	describe('si.day & si.pas.day', function(){
 		it('should return true if a given day name equals the given date day', function(){
 			var timestamp =  1459695890736;
 			var dayName = 'Sunday';
@@ -288,9 +287,50 @@ describe('checking date', function(){
 			expect(si.day(date, true)).to.be.false;
 
 			expect(si.pas.day(date, dayName)).to.be.false;
-			
 
-		})
+
+		});
+	});
+
+	describe('si.month & si.pas.month', function(){
+		it('should return true if a given month name equals the given date month', function(){
+			var timestamp =  1459695890736;
+			var dayName = 'April';
+			var date =  new Date();
+			date.setTime(timestamp);
+
+			expect(si.month(date, dayName)).to.be.true;
+			expect(si.month(null, dayName)).to.be.false;
+			expect(si.month(date, '')).to.be.false;
+			expect(si.month(date, true)).to.be.false;
+
+			expect(si.pas.month(date, dayName)).to.be.false;
+
+		});
+	});
+
+	describe('si.inDateRange & si.pas.inDateRange', function(){
+		it('should return true if a given date its between start date and end date', function(){
+			var today =  new Date();
+			var past = new Date();
+			past.setDate(today.getDate() - 1);
+
+			var futur = new Date();
+			futur.setDate(today.getDate() + 3);
+			expect(si.inDateRange(today , past, futur)).to.be.true;
+
+			expect(si.pas.inDateRange(today , past, futur)).to.be.false;
+		});
+	});
+	describe('si.pattern & si.pas.pattern', function(){
+		it('should return true if a given value respect the given pattern', function(){
+			expect(si.pattern('ali.amechghal@github.com',si.regexpsOptions.email)).to.be.true;
+			expect(si.pattern('https://github.com',si.regexpsOptions.url)).to.be.true;
+
+			expect(si.pas.pattern('ali.amechghal@github.com',si.regexpsOptions.email)).to.be.false;
+			expect(si.pas.pattern('https://github.com',si.regexpsOptions.url)).to.be.false;
+
+		});
 	});
 });
 
