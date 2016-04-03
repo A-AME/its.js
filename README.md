@@ -16,7 +16,7 @@ An example of use as NodeJs Module
 ```js
    var si = requir('si');
    //check if a given argument an array
-   if(si.array(new Array[])){
+   if(si.array(new Array())){
 
    }
    //check if a given value is not boolean type
