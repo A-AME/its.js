@@ -169,6 +169,92 @@ describe('type checks', function(){
 
 		});
 	});
-});
 
+});
+describe('checking date', function(){
+	describe('si.today & si.pas.today', function(){
+		it('it should return true if a given date is today date', function(){
+			var today =  new Date();
+			var yesterday = new Date();
+			yesterday.setDate(today.getDate() - 1);
+
+			var tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+			expect(si.today(today)).to.be.true;
+			expect(si.today(yesterday)).to.be.false;
+			expect(si.today(tomorrow)).to.be.false;
+
+			expect(si.pas.today(today)).to.be.false;
+			expect(si.pas.today(yesterday)).to.be.true;
+			expect(si.pas.today(tomorrow)).to.be.true;
+
+		});
+	});
+	describe('si.tomorrow & si.pas.tomorrow', function(){
+		it('it should return true if a given date is tomorrow date', function(){
+			var today =  new Date();
+			var yesterday = new Date();
+			yesterday.setDate(today.getDate() - 1);
+
+			var tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+            var futur = new Date();
+			futur.setDate(today.getDate() + 10);
+			
+			expect(si.tomorrow(today)).to.be.false;
+			expect(si.tomorrow(yesterday)).to.be.false;
+			expect(si.tomorrow(tomorrow)).to.be.true;
+			expect(si.tomorrow(futur)).to.be.false;
+
+			expect(si.pas.tomorrow(today)).to.be.true;
+			expect(si.pas.tomorrow(yesterday)).to.be.true;
+			expect(si.pas.tomorrow(tomorrow)).to.be.false;
+			expect(si.pas.tomorrow(futur)).to.be.true;
+		});
+	});
+
+
+	describe('si.yesterday & si.pas.yesterday', function(){
+		it('it should return true if a given date is yesterday date', function(){
+			var today =  new Date();
+			var yesterday = new Date();
+			yesterday.setDate(today.getDate() - 1);
+
+			var tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+			expect(si.yesterday(today)).to.be.false;
+			expect(si.yesterday(yesterday)).to.be.true;
+			expect(si.yesterday(tomorrow)).to.be.false;
+
+			expect(si.pas.yesterday(today)).to.be.true;
+			expect(si.pas.yesterday(yesterday)).to.be.false;
+			expect(si.pas.yesterday(tomorrow)).to.be.true;
+
+		});
+	});
+
+	describe('si.past & si.pas.past', function(){
+		it('it should return true if a given date is a past date', function(){
+			var today =  new Date();
+			var yesterday = new Date();
+			yesterday.setDate(today.getDate() - 1);
+
+			var tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+			expect(si.past(today)).to.be.false;
+			expect(si.past(yesterday)).to.be.true;
+			expect(si.past(tomorrow)).to.be.false;
+
+			expect(si.pas.past(today)).to.be.true;
+			expect(si.pas.past(yesterday)).to.be.false;
+			expect(si.pas.past(tomorrow)).to.be.true;
+
+		});
+	});
+
+});
 
