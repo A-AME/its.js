@@ -1,5 +1,5 @@
 <snippet>
-  <content><![CDATA[
+  <content>
   # ${1:SI.JS}
   javascript general library to check an object
   ## Installation
@@ -18,6 +18,6 @@
   
   ## License
   MIT
-  ]]></content>
+  </content>
     <tabTrigger>readme</tabTrigger>
     </snippet>
