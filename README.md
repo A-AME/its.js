@@ -20,7 +20,7 @@ An example of use as NodeJs Module
 
    }
    //check if a given value is not boolean type
-   if(its.pas.boolean('')){
+   if(its.not.boolean('')){
 
    }
 ```
