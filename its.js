@@ -1,5 +1,5 @@
 /**
- *  Si.JS Library
+ *  its.JS Library
  *  Author  : Ali-Amechghal
  *  Created to make your life easy
  * 
@@ -9,24 +9,24 @@
 	// AMD Module
 	if(typeof define === 'function' && define.amd){
 		define(function(){
-			return root.si = factory();
+			return root.its = factory();
 		});
 	}else if(typeof exports === 'object'){
 		//NodeJS
 		module.exports = factory();
 	}else{   
 		// Browsers
-		root.si = factory();
+		root.its = factory();
 	}
 }(this, function(){
 	var root  =  this ||  global;
-	var previousSI = root.si;
+	var previousIts = root.its;
 
-	var si = {};
-	si.pas= {};
+	var its = {};
+	its.not= {};
 
 
-	si.VERSION = '0.1.0';
+	its.VERSION = '0.1.0';
 
 	// cache native methods
 	var toString =  Object.prototype.toString;
@@ -42,54 +42,54 @@
 
 	/* ███████████████████ Type check functions ███████████████████ */ 
 
-	si.null= function(_value){
+	its.null= function(_value){
 		return _value === null;
 
 	}
 
-	si.argument = function(_value){
-		return   si.pas.null(_value) && toString.call(_value) === '[object Arguments]'
+	its.argument = function(_value){
+		return   its.not.null(_value) && toString.call(_value) === '[object Arguments]'
 			||  typeof _value === 'object'  && 'callee' in _value; 
 	}
 
-	si.array = function(_value){
+	its.array = function(_value){
 		if(Array.isArray)
 			return Array.isArray.call(null, _value);
 		else
 			return toString.call(_value) == '[object Array]';
 	}
 
-	si.boolean = function (_value){
+	its.boolean = function (_value){
 
-		return si.pas.null(_value) && ( typeof _value === 'boolean' || _value instanceof Boolean 
+		return its.not.null(_value) && ( typeof _value === 'boolean' || _value instanceof Boolean 
 			|| (typeof _value === 'object' && _value.valueOf() === 'boolean') );
 	}
 
-	si.date = function(_value){
+	its.date = function(_value){
 		return (_value instanceof Date || toString.call(_value) === '[object Date]');
 	}
 
-	si.error = function (_value){
+	its.error = function (_value){
 		return (_value instanceof Error || toString.call(_value) === '[object Error]');
 	}
-	si.nan = Number.isNaN || function(_value){
+	its.nan = Number.isNaN || function(_value){
 		return _value !== _value; 
 	}
-	si.number =  function(_value){
+	its.number =  function(_value){
 
-		return si.pas.null(_value) && si.pas.nan(_value) && (typeof _value === 'number' 
+		return its.not.null(_value) && its.not.nan(_value) && (typeof _value === 'number' 
 			|| _value instanceof Number );
 	}
-	si.regexp = function(_value){
+	its.regexp = function(_value){
 		return toString.call(_value) === '[object RegExp]' || _value instanceof RegExp;
 	}
-	si.sameType = function(_valueOne , _valueTwo){
-		if(si.nan(_valueOne) || si.nan(_valueTwo))
-			return si.null(_valueOne) == si.null(_valueTwo);
+	its.sameType = function(_valueOne , _valueTwo){
+		if(its.nan(_valueOne) || its.nan(_valueTwo))
+			return its.null(_valueOne) == its.null(_valueTwo);
 		else
 			return toString.call(_valueOne) === toString.call(_valueTwo);
 	}
-	si.function =  function(_value){
+	its.function =  function(_value){
 		return toString.call(_value) === '[object Function]';
 	}
 
@@ -100,47 +100,47 @@
 	var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
 
-	si.today =  function(_value){
+	its.today =  function(_value){
 		var now = new Date();
-		return si.date(_value) && _value.toDateString() === now.toDateString();
+		return its.date(_value) && _value.toDateString() === now.toDateString();
 
 	}
-	si.tomorrow = function(_value){
+	its.tomorrow = function(_value){
 		var now  =  new Date();
 		var tomorrow = new Date();
 		tomorrow.setDate(now.getDate() + 1);
 
-		return si.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
+		return its.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
 	}
 
-	si.yesterday = function(_value){
+	its.yesterday = function(_value){
 		var now  =  new Date();
 		var tomorrow = new Date();
 		tomorrow.setDate(now.getDate() - 1);
 
-		return si.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
+		return its.date(_value) && _value.toDateString() === tomorrow.toDateString(); 
 	}
 
-	si.past = function(_value){
+	its.nott = function(_value){
 
         var currentDate =  new Date();
-		return si.date(_value) && _value.getTime() < currentDate.getTime();
+		return its.date(_value) && _value.getTime() < currentDate.getTime();
 	}
 
-	si.futur = function(_value){
-		return si.pas.today(_value) && si.pas.past(_value);
+	its.futur = function(_value){
+		return its.not.today(_value) && its.not.nott(_value);
 	}  
-	si.day= function(_dateObj , _dayString){
-		return si.date(_dateObj) && typeof _dayString === 'string'
+	its.day= function(_dateObj , _dayString){
+		return its.date(_dateObj) && typeof _dayString === 'string'
 		 && _dayString.toLowerCase() == days[_dateObj.getDay()]; 
 	}
-	si.month = function(_dateObj ,  _monthStr){
-		return si.date(_dateObj) && typeof _monthStr === 'string' 
+	its.month = function(_dateObj ,  _monthStr){
+		return its.date(_dateObj) && typeof _monthStr === 'string' 
 		  && (_monthStr.toLowerCase() == months[_dateObj.getMonth()]);
 	}
-	si.inDateRange =  function(_dateObj  , _startDate ,  _endDate){
-		if(si.pas.date(_dateObj) ||  si.pas.date(_startDate)
-				||  si.pas.date(_endDate)){
+	its.inDateRange =  function(_dateObj  , _startDate ,  _endDate){
+		if(its.not.date(_dateObj) ||  its.not.date(_startDate)
+				||  its.not.date(_endDate)){
 			return false;
 		}
 		return (_dateObj.getTime() <=  _endDate.getTime() && _dateObj.getTime() >= _startDate.getTime());
@@ -150,7 +150,7 @@
 	/* ███████████████████ Pattern check functions ███████████████████ */ 
 
 
-	si.regexpsOptions ={
+	its.regexpsOptions ={
 			url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i,
 			email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i,
 			creditCard: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/,
@@ -171,23 +171,23 @@
 			ip: /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/
 	}; 
 
-	si.pattern = function(_value, _pattern){
-		return si.pas.null(_value) && si.pas.null(_pattern)
-		&&  (si.regexp(_pattern) || si.regexp(new RegExp(_pattern))) && _pattern.test(_value);
+	its.pattern = function(_value, _pattern){
+		return its.not.null(_value) && its.not.null(_pattern)
+		&&  (its.regexp(_pattern) || its.regexp(new RegExp(_pattern))) && _pattern.test(_value);
 
 	}
 	/* ███████████████████ Plat-form check functions ███████████████████ */
 
 	function enrichFunctions(){
-		for (var _key in si){
-			if(hasOwnProperty.call(si  , _key) && si.function(si[_key])){
-				si.pas[_key] = pas(si[_key]);
+		for (var _key in its){
+			if(hasOwnProperty.call(its  , _key) && its.function(its[_key])){
+				its.not[_key] = pas(its[_key]);
 			}
 		}
 	}
 	enrichFunctions();
 
-	return si;
+	return its;
 
 }));
 

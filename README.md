@@ -1,4 +1,4 @@
-# Si.js
+# its.js
 
 A node js and browser library to check types 
 
@@ -14,13 +14,13 @@ $
 
 An example of use as NodeJs Module
 ```js
-   var si = requir('si');
+   var its = requir('its');
    //check if a given argument an array
-   if(si.array(new Array())){
+   if(its.array(new Array())){
 
    }
    //check if a given value is not boolean type
-   if(si.pas.boolean('')){
+   if(its.pas.boolean('')){
 
    }
 ```
