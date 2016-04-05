@@ -14,8 +14,8 @@ $
 
 An example of use as NodeJs Module
 ```js
-   var its = requir('its');
-   //check if a given argument an array
+   var its = require('its');
+   //check if a given argument is an array
    if(its.array(new Array())){
 
    }
